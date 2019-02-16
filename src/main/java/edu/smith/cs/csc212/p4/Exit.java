@@ -17,6 +17,10 @@ public class Exit {
 	 */
 	private String target;
 	
+	private boolean hidden;
+	
+	
+	
 	/**
 	 * Create a new Exit.
 	 * @param target - where it goes.
@@ -25,6 +29,7 @@ public class Exit {
 	public Exit(String target, String description) {
 		this.description = description;
 		this.target = target;
+		this.hidden = false;
 	}
 	
 	/**
@@ -75,5 +80,12 @@ public class Exit {
 			return this.target.equals(rhs.target) && this.description.equals(rhs.description); 
 		}
 		return false;
+	}
+	
+	public boolean isSecret() {
+		return false;
+	}
+	public void search() {
+		isSecret();
 	}
 }

@@ -17,6 +17,9 @@ public class Place {
 	/**
 	 * This is the identifier of the place.
 	 */
+	
+	private List<SecretExit> secretExits;
+	
 	private String id;
 	/**
 	 * What to tell the user about this place.
@@ -77,8 +80,28 @@ public class Place {
 	 * @return all the exits from this place.
 	 */
 	public List<Exit> getVisibleExits() {
+		for (Exit exit : (List<Exit>) exits) {
+			if (exit.isSecret() == true) {
+				Exit exit1 = (Exit) exit;
+				exits.remove(exit1);
+				System.out.println("secret exit");
+				//SecretExit secExit = (SecretExit) exit;
+				//secretExits.add(secExit);
+			}
+			else {
+				System.out.println("no secret exit");
+			}
+		}
 		return Collections.unmodifiableList(exits);
 	}
+
+	/*
+	 * public List<Exit> getInvisibleExits() { for (SecretExit secExit :
+	 * (List<SecretExit>) secretExits) { if (secExit.isSecret() == true) { Exit exit
+	 * = (Exit) secExit; exits.add(secExit); System.out.println("secret exit");
+	 * //SecretExit secExit = (SecretExit) exit; //secretExits.add(secExit); } }
+	 * return Collections.unmodifiableList(exits); }
+	 */
 	
 	/**
 	 * This is a terminal location (good or bad).
