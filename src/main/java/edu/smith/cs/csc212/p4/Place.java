@@ -31,7 +31,7 @@ public class Place {
 	 */
 	private String description;
 	
-	private List<String> keys;
+	public List<String> keys;
 	
 	private String description2;
 	
@@ -71,6 +71,9 @@ public class Place {
 	
 	public void addItem(String item, boolean isKey) {
 		this.items.add(item);
+		if (isKey == true) {
+			this.keys.add(item);
+		}
 	}
 	
 	/*

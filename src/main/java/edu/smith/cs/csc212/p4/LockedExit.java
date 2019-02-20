@@ -4,9 +4,11 @@ public class LockedExit extends Exit{
 
 	public LockedExit(String target, String description, String key) {
 		super(target, description);
+		this.key = key;
 	}
 	
 private boolean hidden = true;
+public String key;
 	
 	public String getTarget() {
 		return super.getTarget();
@@ -38,6 +40,7 @@ private boolean hidden = true;
 	@Override
 	public void search() {
 		this.hidden = false;
+		System.out.println(this.key);
 	}
 	
 

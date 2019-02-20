@@ -35,7 +35,7 @@ public class InteractiveFiction {
 		
 		// This is the current location of the player (initialize as start).
 		// Maybe we'll expand this to a Player object.
-		List<String> player = new ArrayList<>();
+		List<String> inventoryList = new ArrayList<>();
 		String place = game.getStart();
 		
 		
@@ -46,24 +46,13 @@ public class InteractiveFiction {
 			// Print the description of where you are.
 			Place here = game.getPlace(place);
 			
-			if (here.items.isEmpty()) {
-				System.out.println(here.getDescription());
-				System.out.println(player);
+			if (inventoryList.containsAll(here.items)) {
+				here.printDescription();
 			}
+			
 			else {
-			for (int i=0; i<here.items.size(); i++) {
-				if (player.contains(here.items.get(i))) {
-					here.printDescription();
-				}
-				else {
-					System.out.println(here.getDescription());
-					System.out.println(player);
-				}
+				System.out.println(here.getDescription());
 			}
-			}
-			
-			
-			
 			
 
 			// Game over after print!
@@ -104,13 +93,15 @@ public class InteractiveFiction {
 			
 			else if (action.equals("search")) {
 				for (Exit exit : totalExits) {
-					if (exit instanceof Exit || exit instanceof SecretExit) {
+					if (exit instanceof SecretExit) {
+						System.out.println("this is normal exit");
 						exit.search();
-					} else {
-						if (exit instanceof LockedExit) {
-							//if (player.contains(here.key)==true)
+					} else if (exit instanceof LockedExit) {
+							if (inventoryList.contains(((LockedExit) exit).key)==true) {
+								System.out.println("this is locked exit");
+								exit.search();
+							} 
 						}
-					}
 					
 				}
 				continue;
@@ -119,20 +110,20 @@ public class InteractiveFiction {
 			else if (action.equals("take")) {
 				//here.getItems();
 				for (int i=0; i<here.items.size(); i++) {
-					if (player.contains(here.items)==false) {
+					if (inventoryList.contains(here.items)==false) {
 					//if (player.contains(here.items.get(i))==false) {
-						player.add(here.items.get(i));
+						inventoryList.add(here.items.get(i));
 					}
 				}
-				System.out.println(player);
+				System.out.println(inventoryList);
 				continue;
 			}
 			
 			else if (action.equals("inventory")) {
-				if (player.isEmpty()==true) {
+				if (inventoryList.isEmpty()==true) {
 					System.out.println("You have nothing in your inventory!");
 				}
-				else { System.out.println(player);
+				else { System.out.println(inventoryList);
 				}
 				continue;
 			}

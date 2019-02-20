@@ -57,16 +57,17 @@ public class SpookyMansion implements GameWorld {
 		basement.addExit(new SecretExit("cellar", "This is the secret cellar."));
 		basement.addExit(new Exit("trampolineRoom", "For some reason there's a trampoline and a giant hole in the ceiling"));
 		basement.addItem("bear", true);
-		basement.addItem("cat", false);
 		
 		Place attic = insert(Place.create("attic",
 				"Something rustles in the rafters as you enter the attic. Creepy.\n"
-				+ "You tripped over a pencil. \n"
+				+ "You tripped over a pencil and eraser. \n"
 				+ "It's big up here.", 
 				"Something rustles in the rafters as you enter the attic. Creepy.\n" + "It's big up here."));
 		attic.addExit(new Exit("entranceHall", "There are stairs leading down."));
-		attic.addExit(new Exit("attic2", "There is more through an archway"));
+		//attic.addExit(new Exit("attic2", "There is more through an archway"));
+		attic.addExit(new LockedExit("attic2", "There is more through an archway - locked","bear"));
 		attic.addItem("pencil", false);
+		attic.addItem("eraser", false);
 		
 		Place attic2 = insert(Place.noItem("attic2", "There's definitely a bat in here somewhere.\n"
 				+ "This part of the attic is brighter, so maybe you're safe here."));
