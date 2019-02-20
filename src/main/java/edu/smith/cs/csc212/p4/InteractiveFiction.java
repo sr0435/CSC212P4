@@ -45,7 +45,26 @@ public class InteractiveFiction {
 		while (true) {
 			// Print the description of where you are.
 			Place here = game.getPlace(place);
-			System.out.println(here.getDescription());
+			
+			if (here.items.isEmpty()) {
+				System.out.println(here.getDescription());
+				System.out.println(player);
+			}
+			else {
+			for (int i=0; i<here.items.size(); i++) {
+				if (player.contains(here.items.get(i))) {
+					here.printDescription();
+				}
+				else {
+					System.out.println(here.getDescription());
+					System.out.println(player);
+				}
+			}
+			}
+			
+			
+			
+			
 
 			// Game over after print!
 			if (here.isTerminalState()) {
@@ -85,19 +104,27 @@ public class InteractiveFiction {
 			
 			else if (action.equals("search")) {
 				for (Exit exit : totalExits) {
-					exit.search();
+					if (exit instanceof Exit || exit instanceof SecretExit) {
+						exit.search();
+					} else {
+						if (exit instanceof LockedExit) {
+							//if (player.contains(here.key)==true)
+						}
+					}
+					
 				}
 				continue;
 			}
 			
 			else if (action.equals("take")) {
-				here.getItems();
-				for (int i=0; i<here.inventory.size(); i++) {
-					if (player.contains(here.inventory.get(i))==false) {
-						player.addAll(here.inventory);
+				//here.getItems();
+				for (int i=0; i<here.items.size(); i++) {
+					if (player.contains(here.items)==false) {
+					//if (player.contains(here.items.get(i))==false) {
+						player.add(here.items.get(i));
 					}
 				}
-				
+				System.out.println(player);
 				continue;
 			}
 			

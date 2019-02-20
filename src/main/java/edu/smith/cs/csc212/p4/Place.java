@@ -31,7 +31,9 @@ public class Place {
 	 */
 	private String description;
 	
-	//private String description2;
+	private List<String> keys;
+	
+	private String description2;
 	
 	//private String[] args;
 	/**
@@ -53,7 +55,8 @@ public class Place {
 		this.terminal = terminal;
 		this.items = new ArrayList<>();
 		this.inventory = new ArrayList<>();
-		//this.description2 = description2;
+		this.keys = new ArrayList<>();
+		this.description2 = description2;
 
 	}
 	
@@ -66,7 +69,7 @@ public class Place {
 		this.totalExits.add(exit);
 	}
 	
-	public void addItem(String item) {
+	public void addItem(String item, boolean isKey) {
 		this.items.add(item);
 	}
 	
@@ -99,25 +102,25 @@ public class Place {
 	}
 	
 	public void printDescription() {
-		System.out.println(this.description);
+		System.out.println(this.description2);
 	}
 	
-	public void getItems() {
+	//public void getItems() {
 		//inventory.removeAll(items);
 		//if (items.isEmpty() == false) {
 			//System.out.println(items);
-			for (int i=0; i<items.size(); i++) {
-				if (inventory.contains(items.get(i))==false) {
-					inventory.add(items.get(i));
-					System.out.println("You obtained the: " + items.get(i));
-					System.out.println(items.get(i) + "removed");
-					items.remove(i);
-				}
+			//for (int i=0; i<items.size(); i++) {
+				//if (inventory.contains(items.get(i))==false) {
+					//inventory.add(items.get(i));
+					//System.out.println("You obtained the: " + items.get(i));
+					//System.out.println(items.get(i) + "removed");
+					//items.remove(i);
+				//}
 				
 
-			}
+			//}
 			
-		}
+		//}
 		
 		//TextInput input = TextInput.fromArgs(args);
 		
@@ -127,19 +130,6 @@ public class Place {
 			//inventory.add(choice);
 			//}
 		//}
-		
-	
-	  /*for (Exit exit : (List<Exit>) exits) { 
-		  String[] wordList = exit.getDescription().split(" "); 
-		  for (String word : (String[]) wordList) {
-	  //for (String used : (List<String>) inventory) {
-	  //System.out.println(inventory); //if (word.contentEquals(used)==false) 
-			  { for (String item : (List<String>) items) { 
-				  if (word.equalsIgnoreCase(item)) {
-					  System.out.println("You obtained the: " + item); 
-					  inventory.add(item);
-	 
-			} }}}}}*/
 	
 	public List<String> getInventory() {
 		System.out.println("This is your inventory list: " + this.inventory);
