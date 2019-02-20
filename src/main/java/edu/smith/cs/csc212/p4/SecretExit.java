@@ -38,14 +38,12 @@ public class SecretExit extends Exit{
 	}
 	@Override
 	public boolean isSecret() {
-		//getVisibleExits();
-		
-		return true;
+		return hidden;
 	}
 	@Override
 	public void search() {
 		this.hidden = false;
-		isSecret();
+		//isSecret();
 	}
 	
 	

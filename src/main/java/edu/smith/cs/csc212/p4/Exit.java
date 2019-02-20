@@ -17,7 +17,7 @@ public class Exit {
 	 */
 	private String target;
 	
-	private boolean hidden;
+	public boolean hidden;
 	
 	
 	
@@ -83,9 +83,8 @@ public class Exit {
 	}
 	
 	public boolean isSecret() {
-		return false;
+		return this.hidden;
 	}
 	public void search() {
-		isSecret();
 	}
 }

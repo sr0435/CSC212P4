@@ -14,11 +14,16 @@ public class Place {
 	 * This is a list of places we can get to from this place.
 	 */
 	private List<Exit> exits;
+	
+	private List<Exit> totalExits;
 	/**
 	 * This is the identifier of the place.
 	 */
 	
-	private List<SecretExit> secretExits;
+	public List<String> items;
+	
+	public List<String> inventory;
+	//private List<SecretExit> secretExits;
 	
 	private String id;
 	/**
@@ -40,7 +45,10 @@ public class Place {
 		this.id = id;
 		this.description = description;
 		this.exits = new ArrayList<>();
+		this.totalExits = new ArrayList<>();
 		this.terminal = terminal;
+		this.items = new ArrayList<>();
+		this.inventory = new ArrayList<>();
 	}
 	
 	/**
@@ -49,7 +57,16 @@ public class Place {
 	 */
 	public void addExit(Exit exit) {
 		this.exits.add(exit);
+		this.totalExits.add(exit);
 	}
+	
+	public void addItem(String item) {
+		this.items.add(item);
+	}
+	
+	/*
+	 * public void addSecretExit(SecretExit exit) { this.secretExits.add(exit); }
+	 */
 	
 	/**
 	 * For gameplay, whether this place ends the game.
@@ -74,27 +91,57 @@ public class Place {
 	public String getDescription() {
 		return this.description;
 	}
+	
+	public void getItems() {
+		for (Exit exit : (List<Exit>) exits) {
+			String[] wordList = exit.getDescription().split(" ");
+			for (String word : (String[]) wordList) {
+				//for (String used : (List<String>) inventory) {
+					//System.out.println(inventory);
+					//if (word.contentEquals(used)==false) {
+						for (String item : (List<String>) items) {
+							if (word.equalsIgnoreCase(item)) {
+								System.out.println("You obtained the: " + item);
+								inventory.add(item);
+								
+								}
+							}
+						}
+					}
+				}
+			//}
+		//}
+	
+	public List<String> getInventory() {
+		System.out.println("This is your inventory list: " + this.inventory);
+		return this.inventory;
+	}
 
 	/**
 	 * Get a view of the exits from this Place, for navigation.
 	 * @return all the exits from this place.
 	 */
 	public List<Exit> getVisibleExits() {
-		for (Exit exit : (List<Exit>) exits) {
+		exits.removeAll(totalExits);
+		exits.addAll(totalExits);
+		for (Exit exit : totalExits) {
+			//System.out.println("before");
 			if (exit.isSecret() == true) {
-				Exit exit1 = (Exit) exit;
-				exits.remove(exit1);
-				System.out.println("secret exit");
+				//System.out.println(exit);
+				//Exit exit1 = (Exit) exit;
+				exits.remove(exit);
 				//SecretExit secExit = (SecretExit) exit;
 				//secretExits.add(secExit);
-			}
-			else {
-				System.out.println("no secret exit");
 			}
 		}
 		return Collections.unmodifiableList(exits);
 	}
+	
+	public List<Exit> totalExits() {
+		return totalExits;
+	}
 
+	
 	/*
 	 * public List<Exit> getInvisibleExits() { for (SecretExit secExit :
 	 * (List<SecretExit>) secretExits) { if (secExit.isSecret() == true) { Exit exit

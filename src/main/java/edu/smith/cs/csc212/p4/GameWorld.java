@@ -1,5 +1,8 @@
 package edu.smith.cs.csc212.p4;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * This is the interface through which our main method in {@link InteractiveFiction} interacts with different games.
  * @author jfoley

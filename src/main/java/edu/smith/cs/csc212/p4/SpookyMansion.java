@@ -1,5 +1,7 @@
 package edu.smith.cs.csc212.p4;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,25 +12,39 @@ import java.util.Map;
  */
 public class SpookyMansion implements GameWorld {
 	private Map<String, Place> places = new HashMap<>();
+	public Map<String,List<String>> player = new HashMap<>();
+	//private List<String> inventoryList = new ArrayList<>();
+	//private List<String> items = new ArrayList<>();
 	
 	/**
 	 * Where should the player start?
 	 */
 	@Override
-	public String getStart() {
-		return "entranceHall";
-	}
+	
+	public String getStart() { 
+		return "entranceHall"; 
+		}
+	 
 
 	/**
 	 * This constructor builds our SpookyMansion game.
 	 */
+	
+	
 	public SpookyMansion() {
+		
+		
 		Place entranceHall = insert(
 				Place.create("entranceHall", "You are in the grand entrance hall of a large building.\n"
 						+ "The front door is locked. How did you get here?"));
-		entranceHall.addExit(new Exit("basement", "There are stairs leading down."));
+		entranceHall.addExit(new Exit("basement", "There are stairs leading down, and a creepy rug ."));
 		entranceHall.addExit(new Exit("attic", "There are stairs leading up."));
 		entranceHall.addExit(new Exit("kitchen", "There is a red door."));
+		//entranceHall.addItem("rug");
+		
+		
+		//entranceHall.addExit(new Exit("rock", "This is a rock."));
+		
 		
 		Place basement = insert(
 				Place.create("basement", "You have found the basement of the mansion.\n" + 
@@ -48,10 +64,10 @@ public class SpookyMansion implements GameWorld {
 		Place attic2 = insert(Place.create("attic2", "There's definitely a bat in here somewhere.\n"
 				+ "This part of the attic is brighter, so maybe you're safe here."));
 		attic2.addExit(new Exit("attic", "There is more back through the archway"));
-		attic2.addExit(new Exit("trampolineRoom", "This is the trampoline room."));
+		attic2.addExit(new Exit("trampolineRoom", "There is a hole that leads to the trampoline room."));
 
 		Place cellar = insert(Place.create("cellar", "There are a lot of pickles in this cellar"));
-		cellar.addExit(new Exit("basement", "This is the basement"));
+		cellar.addExit(new SecretExit("basement", "This is the basement"));
 		
 		Place trampolineRoom = insert(Place.create("trampolineRoom", "A trampoline room... Odd flex, but ok..."));
 		trampolineRoom.addExit(new Exit("attic2", "This is the attic"));
@@ -104,6 +120,7 @@ public class SpookyMansion implements GameWorld {
 		places.put(p.getId(), p);
 		return p;
 	}
+	
 
 	/**
 	 * I like this method for checking to make sure that my graph makes sense!
