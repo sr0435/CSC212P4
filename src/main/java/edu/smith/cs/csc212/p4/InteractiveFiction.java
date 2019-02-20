@@ -12,10 +12,15 @@ import java.util.Map;
  */
 public class InteractiveFiction {
 
+	List<String> inventory;
+	
+	//this.inventory = inventory;
 	/**
 	 * This is where we play the game.
 	 * @param args
 	 */
+	
+		
 	public static void main(String[] args) {
 		// This is a text input source (provides getUserWords() and confirm()).
 		TextInput input = TextInput.fromArgs(args);
@@ -50,7 +55,7 @@ public class InteractiveFiction {
 			// Show a user the ways out of this place.
 			List<Exit> exits = here.getVisibleExits();
 			List<Exit> totalExits = here.totalExits();
-			//List<SecretExit> secExits = here.getVisibleExits();
+			//List<String> inventory = ;
 			
 			for (int i=0; i<exits.size(); i++) {
 			    Exit e = exits.get(i);
@@ -87,12 +92,16 @@ public class InteractiveFiction {
 			
 			else if (action.equals("take")) {
 				here.getItems();
-				here.getInventory();
+				player.addAll(here.inventory);
 				continue;
 			}
 			
 			else if (action.equals("inventory")) {
-				here.getInventory();
+				if (player.isEmpty()==true) {
+					System.out.println("You have nothing in your inventory!");
+				}
+				else { System.out.println(player);
+				}
 				continue;
 			}
 			
@@ -123,5 +132,5 @@ public class InteractiveFiction {
 		// You get here by "quit" or by reaching a Terminal Place.
 		System.out.println(">>> GAME OVER <<<");
 	}
-
-}
+	
+	}

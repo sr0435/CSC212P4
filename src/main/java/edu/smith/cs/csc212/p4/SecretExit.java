@@ -43,7 +43,6 @@ public class SecretExit extends Exit{
 	@Override
 	public void search() {
 		this.hidden = false;
-		//isSecret();
 	}
 	
 	

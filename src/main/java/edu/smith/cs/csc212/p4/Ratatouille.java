@@ -19,14 +19,14 @@ public class Ratatouille implements GameWorld{
 	 */
 	public Ratatouille() {
 		Place gusteauFoyer = insert(
-				Place.create("gusteauFoyer", "Your first day at your new job.\n"
+				Place.noItem("gusteauFoyer", "Your first day at your new job.\n"
 						+ "You're working at one of the best restaurants in Paris, Gusteau's. \n"
 						+ "What could go wrong?"));
 		gusteauFoyer.addExit(new Exit("diningRoom", "The dining room is through the hallway."));
 		gusteauFoyer.addExit(new Exit("coatCheck", "The little closet is the coat check."));
 		
 		Place diningRoom = insert(
-				Place.create("diningRoom", "This is the dining room. It's nice and cozy.\n" 
+				Place.noItem("diningRoom", "This is the dining room. It's nice and cozy.\n" 
 						+ "Everything is so elegant.\n" 
 						+ "But you won't be working here."
 						));
@@ -35,7 +35,7 @@ public class Ratatouille implements GameWorld{
 		diningRoom.addExit(new Exit("kitchen", "Double doors leading to the kitchen."));
 		
 		Place coatCheck = insert(
-				Place.create("coatCheck", "This is the coat check closet. It's rather snug inside.\n" 
+				Place.noItem("coatCheck", "This is the coat check closet. It's rather snug inside.\n" 
 				+ "It's so tight in here that you can't get out!"));
 		/*
 		 * coatCheck.addExit(new Exit("gusteauFoyer",
@@ -44,25 +44,25 @@ public class Ratatouille implements GameWorld{
 		 */
 		
 		Place kitchen = insert(
-				Place.create("kitchen", "This is the kitchen. Maybe you'll get to meet Remy here"
+				Place.noItem("kitchen", "This is the kitchen. Maybe you'll get to meet Remy here"
 				));
 		kitchen.addExit(new Exit("diningRoom", "These doors lead to the dining room"));
 		kitchen.addExit(new Exit("soupStation", "This is the kitchen's soup station"));
 
-		Place soupStation = insert(Place.create("soupStation",
+		Place soupStation = insert(Place.noItem("soupStation",
 				 "This is where you'll be making soup.\n" +
 				 "Mmmm Bouillabaisse...")); 
 		soupStation.addExit(new Exit("kitchen", "Back to the main area of the kitchen")); 
 		soupStation.addExit(new Exit("breadStation", "This is the kitchen's bread oven"));
 		
-		Place breadStation = insert(Place.create("breadStation",
+		Place breadStation = insert(Place.noItem("breadStation",
 				 "This is where all the bread gets baked...\n" +
 				 "It's nice and warm in here.")); 
 		breadStation.addExit(new Exit("kitchen", "Back to the main area of the kitchen")); 
 		breadStation.addExit(new Exit("soupStation", "This is the kitchen's soup station"));
 		breadStation.addExit(new Exit("pantry", "This door leads to the pantry and cooler"));
 		
-		Place pantry = insert(Place.create("pantry",
+		Place pantry = insert(Place.noItem("pantry",
 				 "This is where all the food for Gusteau's gets stored.\n" +
 				 "There's so much food here...")); 
 		pantry.addExit(new Exit("kitchen", "Back to the main area of the kitchen")); 
@@ -72,7 +72,7 @@ public class Ratatouille implements GameWorld{
 		 int pantryDepth = 3; 
 		 int lastPantrySection = pantryDepth - 1; 
 		 for (int i=0; i<pantryDepth; i++) { 
-			 Place pantrySection = insert(Place.create("pantrySection"+i,
+			 Place pantrySection = insert(Place.noItem("pantrySection"+i,
 				  "This is a very long pantry. You're on like shelf " + (i+1)*10 +
 				  " now")); 
 			 if (i == 0) { 

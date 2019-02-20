@@ -21,4 +21,5 @@ public interface GameWorld {
 	 * @return the place object.
 	 */
 	public Place getPlace(String id);
+
 }

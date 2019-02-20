@@ -30,6 +30,10 @@ public class Place {
 	 * What to tell the user about this place.
 	 */
 	private String description;
+	
+	//private String description2;
+	
+	//private String[] args;
 	/**
 	 * Whether reaching this place ends the game.
 	 */
@@ -41,7 +45,7 @@ public class Place {
 	 * @param description - the user-facing description of the place.
 	 * @param terminal - whether this place ends the game.
 	 */
-	private Place(String id, String description, boolean terminal) {
+	private Place(String id, String description, String description2, boolean terminal) {
 		this.id = id;
 		this.description = description;
 		this.exits = new ArrayList<>();
@@ -49,6 +53,8 @@ public class Place {
 		this.terminal = terminal;
 		this.items = new ArrayList<>();
 		this.inventory = new ArrayList<>();
+		//this.description2 = description2;
+
 	}
 	
 	/**
@@ -92,25 +98,48 @@ public class Place {
 		return this.description;
 	}
 	
+	public void printDescription() {
+		System.out.println(this.description);
+	}
+	
 	public void getItems() {
-		for (Exit exit : (List<Exit>) exits) {
-			String[] wordList = exit.getDescription().split(" ");
-			for (String word : (String[]) wordList) {
-				//for (String used : (List<String>) inventory) {
-					//System.out.println(inventory);
-					//if (word.contentEquals(used)==false) {
-						for (String item : (List<String>) items) {
-							if (word.equalsIgnoreCase(item)) {
-								System.out.println("You obtained the: " + item);
-								inventory.add(item);
-								
-								}
-							}
-						}
-					}
+		//inventory.removeAll(items);
+		//if (items.isEmpty() == false) {
+			//System.out.println(items);
+			for (int i=0; i<items.size(); i++) {
+				if (inventory.contains(items.get(i))==false) {
+					inventory.add(items.get(i));
+					System.out.println("You obtained the: " + items.get(i));
+					System.out.println(items.get(i) + "removed");
+					items.remove(i);
 				}
+				
+
+			}
+			
+		}
+		
+		//TextInput input = TextInput.fromArgs(args);
+		
+		//List<String> words = input.getUserWords(">");
+		//String choice = words.get(0).toLowerCase().trim();
+		//if (inventory.contains(choice) == false) {
+			//inventory.add(choice);
 			//}
 		//}
+		
+	
+	  /*for (Exit exit : (List<Exit>) exits) { 
+		  String[] wordList = exit.getDescription().split(" "); 
+		  for (String word : (String[]) wordList) {
+	  //for (String used : (List<String>) inventory) {
+	  //System.out.println(inventory); //if (word.contentEquals(used)==false) 
+			  { for (String item : (List<String>) items) { 
+				  if (word.equalsIgnoreCase(item)) {
+					  System.out.println("You obtained the: " + item); 
+					  inventory.add(item);
+	 
+			} }}}}}*/
 	
 	public List<String> getInventory() {
 		System.out.println("This is your inventory list: " + this.inventory);
@@ -157,7 +186,11 @@ public class Place {
 	 * @return the Place object.
 	 */
 	public static Place terminal(String id, String description) {
-		return new Place(id, description, true);
+		return new Place(id, description, description, true);
+	}
+	
+	public static Place noItem(String id, String description) {
+		return new Place(id, description, description, false);
 	}
 	
 	/**
@@ -166,8 +199,8 @@ public class Place {
 	 * @param description - this is what we show to the user.
 	 * @return the new Place object (add exits to it).
 	 */
-	public static Place create(String id, String description) {
-		return new Place(id, description, false);
+	public static Place create(String id, String description, String description2) {
+		return new Place(id, description, description2, false);
 	}
 	
 	/**
