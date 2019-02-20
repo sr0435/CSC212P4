@@ -92,7 +92,12 @@ public class InteractiveFiction {
 			
 			else if (action.equals("take")) {
 				here.getItems();
-				player.addAll(here.inventory);
+				for (int i=0; i<here.inventory.size(); i++) {
+					if (player.contains(here.inventory.get(i))==false) {
+						player.addAll(here.inventory);
+					}
+				}
+				
 				continue;
 			}
 			

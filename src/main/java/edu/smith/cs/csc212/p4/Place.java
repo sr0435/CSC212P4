@@ -154,13 +154,8 @@ public class Place {
 		exits.removeAll(totalExits);
 		exits.addAll(totalExits);
 		for (Exit exit : totalExits) {
-			//System.out.println("before");
 			if (exit.isSecret() == true) {
-				//System.out.println(exit);
-				//Exit exit1 = (Exit) exit;
 				exits.remove(exit);
-				//SecretExit secExit = (SecretExit) exit;
-				//secretExits.add(secExit);
 			}
 		}
 		return Collections.unmodifiableList(exits);
@@ -169,15 +164,6 @@ public class Place {
 	public List<Exit> totalExits() {
 		return totalExits;
 	}
-
-	
-	/*
-	 * public List<Exit> getInvisibleExits() { for (SecretExit secExit :
-	 * (List<SecretExit>) secretExits) { if (secExit.isSecret() == true) { Exit exit
-	 * = (Exit) secExit; exits.add(secExit); System.out.println("secret exit");
-	 * //SecretExit secExit = (SecretExit) exit; //secretExits.add(secExit); } }
-	 * return Collections.unmodifiableList(exits); }
-	 */
 	
 	/**
 	 * This is a terminal location (good or bad).
