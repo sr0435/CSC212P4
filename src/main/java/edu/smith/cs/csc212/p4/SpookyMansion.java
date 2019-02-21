@@ -12,7 +12,9 @@ import java.util.Map;
  */
 public class SpookyMansion implements GameWorld {
 	private Map<String, Place> places = new HashMap<>();
-	public Map<String,List<String>> player = new HashMap<>();
+	//public Map<String,List<String>> player = new HashMap<>();
+	//public GameTime time;
+	//public int hour;
 	//private List<String> inventoryList = new ArrayList<>();
 	//private List<String> items = new ArrayList<>();
 	
@@ -24,7 +26,11 @@ public class SpookyMansion implements GameWorld {
 	public String getStart() { 
 		return "entranceHall"; 
 		}
-	 
+	/*
+	 * public GameTime startTime() { return time; }
+	 * 
+	 * public int getTime() { return hour; }
+	 */
 
 	/**
 	 * This constructor builds our SpookyMansion game.

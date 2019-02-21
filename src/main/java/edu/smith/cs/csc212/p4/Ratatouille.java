@@ -1,11 +1,15 @@
 package edu.smith.cs.csc212.p4;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Ratatouille implements GameWorld{
 
 	private Map<String, Place> places = new HashMap<>();
+	public Map<String,List<String>> player = new HashMap<>();
+	public GameTime time;
+	public int hour;
 	/**
 	 * Where should the player start?
 	 */
@@ -14,6 +18,7 @@ public class Ratatouille implements GameWorld{
 		return "gusteauFoyer";
 	}
 
+	//public GameTime startTime();
 	/**
 	 * This constructor builds our SpookyMansion game.
 	 */
@@ -49,25 +54,28 @@ public class Ratatouille implements GameWorld{
 		kitchen.addExit(new Exit("diningRoom", "These doors lead to the dining room"));
 		kitchen.addExit(new Exit("soupStation", "This is the kitchen's soup station"));
 
-		Place soupStation = insert(Place.noItem("soupStation",
+		Place soupStation = insert(Place.create("soupStation",
 				 "This is where you'll be making soup.\n" +
-				 "Mmmm Bouillabaisse...")); 
+				 "Mmmm Bouillabaisse...", "This is where you'll be making soup.")); 
 		soupStation.addExit(new Exit("kitchen", "Back to the main area of the kitchen")); 
 		soupStation.addExit(new Exit("breadStation", "This is the kitchen's bread oven"));
+		soupStation.addItem("bouillabaisse", false);
 		
-		Place breadStation = insert(Place.noItem("breadStation",
+		Place breadStation = insert(Place.create("breadStation",
 				 "This is where all the bread gets baked...\n" +
-				 "It's nice and warm in here.")); 
+				"What a tasty-looking baguette!",
+				 "This is where all the bread gets baked...\n" + "It's nice and warm in here.")); 
 		breadStation.addExit(new Exit("kitchen", "Back to the main area of the kitchen")); 
-		breadStation.addExit(new Exit("soupStation", "This is the kitchen's soup station"));
-		breadStation.addExit(new Exit("pantry", "This door leads to the pantry and cooler"));
+		breadStation.addExit(new SecretExit("soupStation", "This is the kitchen's soup station"));
+		breadStation.addExit(new LockedExit("pantry", "This door leads to the pantry and cooler", "baguette"));
+		breadStation.addItem("baguette", true);
 		
 		Place pantry = insert(Place.noItem("pantry",
 				 "This is where all the food for Gusteau's gets stored.\n" +
 				 "There's so much food here...")); 
 		pantry.addExit(new Exit("kitchen", "Back to the main area of the kitchen")); 
 		pantry.addExit(new Exit("soupStation", "This is the kitchen's soup station"));
-		pantry.addExit(new Exit("pantrySection0", "This door leads to the pantry and cooler"));
+		pantry.addExit(new Exit("pantrySection0", "This door leads to further in the pantry"));
 		
 		 int pantryDepth = 3; 
 		 int lastPantrySection = pantryDepth - 1; 

@@ -40,7 +40,7 @@ public String key;
 	@Override
 	public void search() {
 		this.hidden = false;
-		System.out.println(this.key);
+		System.out.println("You used the " + this.key);
 	}
 	
 

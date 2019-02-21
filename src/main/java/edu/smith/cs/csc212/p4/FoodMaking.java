@@ -1,11 +1,29 @@
 package edu.smith.cs.csc212.p4;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // the class that all the minigames inherit from
 public class FoodMaking {
 	
-	public int numIngredients;
+	
+	Map<String,String> combos;
+	
+	
+	public FoodMaking() {
+		this.combos = new HashMap<>();
+	}
+	
+	public Map<String,String> cooking() {
+		//combos.put("bouillabaissebaguette", "Meal");
+		combos.put("eraserpencil", "eraserPencil");
+		combos.put("pencileraser","eraserPencil");
+		return combos;
+		
+	}
+
+	
 	
 	
 	
