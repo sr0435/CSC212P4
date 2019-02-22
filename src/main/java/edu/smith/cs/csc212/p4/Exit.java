@@ -17,6 +17,9 @@ public class Exit {
 	 */
 	private String target;
 	
+	/*
+	 * determines whether the exit is hidden or not
+	 */	
 	public boolean hidden;
 	
 	
@@ -81,10 +84,17 @@ public class Exit {
 		}
 		return false;
 	}
-	
+
+	/*
+	 * returns the status of whether an exit is hidden or not
+	 */
 	public boolean isSecret() {
 		return this.hidden;
 	}
+
+	/*
+	 * doesn't do anything for exit
+	 */
 	public void search() {
 	}
 }

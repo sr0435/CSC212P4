@@ -1,14 +1,18 @@
 package edu.smith.cs.csc212.p4;
 
 public class LockedExit extends Exit{
-
+	/*
+	 * exactly like secret exit, changes marked with //
+	 */
+	private boolean hidden = true;
+	
+	// exit indicates which key will open it
+	public String key;
+	
 	public LockedExit(String target, String description, String key) {
 		super(target, description);
 		this.key = key;
 	}
-	
-private boolean hidden = true;
-public String key;
 	
 	public String getTarget() {
 		return super.getTarget();
@@ -40,6 +44,7 @@ public String key;
 	@Override
 	public void search() {
 		this.hidden = false;
+		// tells which key was used
 		System.out.println("You used the " + this.key);
 	}
 	

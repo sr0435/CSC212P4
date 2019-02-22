@@ -1,7 +1,5 @@
 package edu.smith.cs.csc212.p4;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,31 +10,19 @@ import java.util.Map;
  */
 public class SpookyMansion implements GameWorld {
 	private Map<String, Place> places = new HashMap<>();
-	//public Map<String,List<String>> player = new HashMap<>();
-	//public GameTime time;
-	//public int hour;
-	//private List<String> inventoryList = new ArrayList<>();
-	//private List<String> items = new ArrayList<>();
 	
 	/**
 	 * Where should the player start?
 	 */
 	@Override
-	
 	public String getStart() { 
 		return "entranceHall"; 
 		}
-	/*
-	 * public GameTime startTime() { return time; }
-	 * 
-	 * public int getTime() { return hour; }
-	 */
+
 
 	/**
 	 * This constructor builds our SpookyMansion game.
 	 */
-	
-	
 	public SpookyMansion() {
 		
 		
@@ -47,8 +33,6 @@ public class SpookyMansion implements GameWorld {
 		entranceHall.addExit(new Exit("attic", "There are stairs leading up."));
 		entranceHall.addExit(new Exit("kitchen", "There is a red door."));
 		
-		
-		//entranceHall.addExit(new Exit("rock", "This is a rock."));
 		
 		
 		Place basement = insert(
@@ -62,6 +46,7 @@ public class SpookyMansion implements GameWorld {
 		basement.addExit(new Exit("entranceHall", "There are stairs leading up."));
 		basement.addExit(new SecretExit("cellar", "This is the secret cellar."));
 		basement.addExit(new Exit("trampolineRoom", "For some reason there's a trampoline and a giant hole in the ceiling"));
+		// creates an item for the room
 		basement.addItem("bear", true);
 		
 		Place attic = insert(Place.create("attic",
@@ -70,8 +55,7 @@ public class SpookyMansion implements GameWorld {
 				+ "It's big up here.", 
 				"Something rustles in the rafters as you enter the attic. Creepy.\n" + "It's big up here."));
 		attic.addExit(new Exit("entranceHall", "There are stairs leading down."));
-		//attic.addExit(new Exit("attic2", "There is more through an archway"));
-		attic.addExit(new LockedExit("attic2", "There is more through an archway - locked","bear"));
+		attic.addExit(new LockedExit("attic2", "There is more through an archway","bear"));
 		attic.addItem("pencil", false);
 		attic.addItem("eraser", false);
 		

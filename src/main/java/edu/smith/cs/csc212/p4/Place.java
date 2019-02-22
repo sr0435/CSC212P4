@@ -15,27 +15,30 @@ public class Place {
 	 */
 	private List<Exit> exits;
 	
+	/*
+	 * The list of all the possible exits from this place
+	 */
 	private List<Exit> totalExits;
 	/**
 	 * This is the identifier of the place.
 	 */
-	
-	public List<String> items;
-	
-	public List<String> inventory;
-	//private List<SecretExit> secretExits;
-	
 	private String id;
+	/*
+	 * list of available items at place
+	 */
+	public List<String> items;
 	/**
 	 * What to tell the user about this place.
 	 */
 	private String description;
-	
+	/**
+	 * the list of keys to other exits hidden in the place
+	 */
 	public List<String> keys;
-	
+	/*
+	 * gives another description depending on whether the player as taken an item
+	 */
 	private String description2;
-	
-	//private String[] args;
 	/**
 	 * Whether reaching this place ends the game.
 	 */
@@ -50,14 +53,13 @@ public class Place {
 	private Place(String id, String description, String description2, boolean terminal) {
 		this.id = id;
 		this.description = description;
+		this.description2 = description2;
 		this.exits = new ArrayList<>();
 		this.totalExits = new ArrayList<>();
 		this.terminal = terminal;
 		this.items = new ArrayList<>();
-		this.inventory = new ArrayList<>();
 		this.keys = new ArrayList<>();
-		this.description2 = description2;
-
+		
 	}
 	
 	/**
@@ -68,17 +70,17 @@ public class Place {
 		this.exits.add(exit);
 		this.totalExits.add(exit);
 	}
-	
+
+	/*
+	 * creates an item for the user to pick up
+	 */
 	public void addItem(String item, boolean isKey) {
 		this.items.add(item);
+		// if that item is a key, it puts it in the key list
 		if (isKey == true) {
 			this.keys.add(item);
 		}
 	}
-	
-	/*
-	 * public void addSecretExit(SecretExit exit) { this.secretExits.add(exit); }
-	 */
 	
 	/**
 	 * For gameplay, whether this place ends the game.
@@ -103,48 +105,22 @@ public class Place {
 	public String getDescription() {
 		return this.description;
 	}
-	
+
+	/*
+	 * is a description for the place but before an item has been taken
+	 */
 	public void printDescription() {
 		System.out.println(this.description2);
 	}
 	
-	//public void getItems() {
-		//inventory.removeAll(items);
-		//if (items.isEmpty() == false) {
-			//System.out.println(items);
-			//for (int i=0; i<items.size(); i++) {
-				//if (inventory.contains(items.get(i))==false) {
-					//inventory.add(items.get(i));
-					//System.out.println("You obtained the: " + items.get(i));
-					//System.out.println(items.get(i) + "removed");
-					//items.remove(i);
-				//}
-				
-
-			//}
-			
-		//}
-		
-		//TextInput input = TextInput.fromArgs(args);
-		
-		//List<String> words = input.getUserWords(">");
-		//String choice = words.get(0).toLowerCase().trim();
-		//if (inventory.contains(choice) == false) {
-			//inventory.add(choice);
-			//}
-		//}
-	
-	public List<String> getInventory() {
-		System.out.println("This is your inventory list: " + this.inventory);
-		return this.inventory;
-	}
-
 	/**
 	 * Get a view of the exits from this Place, for navigation.
 	 * @return all the exits from this place.
 	 */
 	public List<Exit> getVisibleExits() {
+		// prevents any exits from being added twice
 		exits.removeAll(totalExits);
+		// removes exits from the total if they can't be accessed (aka secret)
 		exits.addAll(totalExits);
 		for (Exit exit : totalExits) {
 			if (exit.isSecret() == true) {
@@ -153,7 +129,11 @@ public class Place {
 		}
 		return Collections.unmodifiableList(exits);
 	}
-	
+
+	/*
+	 * the total list of exits from the place, regardless of whether they can be
+	 * accessed to
+	 */
 	public List<Exit> totalExits() {
 		return totalExits;
 	}
@@ -168,10 +148,6 @@ public class Place {
 		return new Place(id, description, description, true);
 	}
 	
-	public static Place noItem(String id, String description) {
-		return new Place(id, description, description, false);
-	}
-	
 	/**
 	 * Create a place with an id and description.
 	 * @param id - this is the id of the place (for creating {@link Exit} objects that go here).
@@ -181,7 +157,13 @@ public class Place {
 	public static Place create(String id, String description, String description2) {
 		return new Place(id, description, description2, false);
 	}
-	
+
+	/*
+	 * easier to create a place without items
+	 */
+	public static Place noItem(String id, String description) {
+		return new Place(id, description, description, false);
+	}
 	/**
 	 * Implements what we need to put Place in a HashSet or HashMap.
 	 */
